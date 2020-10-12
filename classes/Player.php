@@ -9,5 +9,8 @@ class Player
 {
     private array $cards;
     private bool $lost = false;
-
+    public $hit;
+    public $surrender;
+    public $getScore;
+    public $hasLost;
 }
