@@ -1,0 +1,6 @@
+.idea/
+node_modules/
+style.scss
+style.css.map
+package-lock.json
+config.js
