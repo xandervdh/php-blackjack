@@ -13,4 +13,11 @@ class Player
     public $surrender;
     public $getScore;
     public $hasLost;
+
+    public function __construct()
+    {
+
+    }
+
+
 }
