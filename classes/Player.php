@@ -7,5 +7,7 @@ error_reporting(E_ALL);
 
 class Player
 {
+    private array $cards;
+    private bool $lost = false;
 
 }
