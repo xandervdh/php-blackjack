@@ -8,10 +8,15 @@ error_reporting(E_ALL);
 require 'classes/Suit.php';
 require 'classes/Card.php';
 require 'classes/Deck.php';
+require 'classes/Player.php';
+require 'classes/Blackjack.php';
 
 $deck = new Deck();
 $deck->shuffle();
-foreach($deck->getCards() AS $card) {
+/*foreach($deck->getCards() AS $card) {
     echo $card->getUnicodeCharacter(true);
     echo '<br>';
-}
+}*/
+
+$player = new Player($deck);
+

@@ -1,10 +1,6 @@
 <?php
 declare(strict_types=1);
 
-ini_set('display_errors', '1');
-ini_set('display_startup_errors', '1');
-error_reporting(E_ALL);
-
 class Player
 {
     private array $cards;
@@ -14,9 +10,12 @@ class Player
     public $getScore;
     public $hasLost;
 
-    public function __construct()
+    public function __construct(Deck $deck)
     {
-
+        $cards = array();
+        array_push($cards, $deck->drawCard());
+        array_push($cards, $deck->drawCard());
+        $this->cards = $cards;
     }
 
 
