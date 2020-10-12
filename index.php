@@ -10,9 +10,12 @@ require 'classes/Card.php';
 require 'classes/Deck.php';
 require 'classes/Player.php';
 require 'classes/Blackjack.php';
+session_start();
 
 $deck = new Deck();
 $deck->shuffle();
+$game = new Blackjack();
+$_SESSION['game'] = $game;
 /*foreach($deck->getCards() AS $card) {
     echo $card->getUnicodeCharacter(true);
     echo '<br>';
