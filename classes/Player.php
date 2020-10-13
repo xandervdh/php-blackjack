@@ -36,17 +36,17 @@ class Player
     }
 
     public function calcTotal(){
+        $this->total = 0;
         $cards = $this->cards;
         for ($i = 0; $i < count($cards); $i++) {
             $this->total += $this->total($cards[$i]);
         }
-        //echo $this->total . ' ';
+
         return $this->total . 'calc';
     }
 
     public function addCard($card){
         array_push($this->cards, $card);
-        var_dump($this->cards);
         echo 'gave a card<br>';
     }
 
