@@ -12,16 +12,7 @@ require 'classes/Player.php';
 require 'classes/Blackjack.php';
 session_start();
 
-$deck = new Deck();
-$deck->shuffle();
-$game = new Blackjack();
-$_SESSION['game'] = $game;
-/*foreach($deck->getCards() AS $card) {
-    echo $card->getUnicodeCharacter(true);
-    echo '<br>';
-}*/
 
-$player = new Player($deck);
 
 ?>
 
@@ -37,7 +28,6 @@ $player = new Player($deck);
     <title>Document</title>
 </head>
 <body>
-
 
 <a href="?action=hit">Hit!</a>
 <a href="?action=stand">Stand</a>
