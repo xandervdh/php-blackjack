@@ -7,7 +7,7 @@ class Blackjack
     private $dealer;
     private $deck;
 
-    public function __construct($player)
+    public function __construct()
     {
         $deck = new Deck();
         $deck->shuffle();
@@ -15,7 +15,6 @@ class Blackjack
         $this->player = new Player($deck);
         $this->dealer = new Player($deck);
     }
-
 
     public function getPlayer()
     {
@@ -27,5 +26,13 @@ class Blackjack
         return $this->dealer;
     }
 
+    public function surrender() :void
+    {
+        $this->player->setLost(true);
+    }
 
+    public function hit(){
+        $this->player->addCard($this->deck->drawCard());
+        $this->player->total();
+    }
 }

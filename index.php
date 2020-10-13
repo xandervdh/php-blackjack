@@ -12,11 +12,29 @@ require 'classes/Player.php';
 require 'classes/Blackjack.php';
 session_start();
 
-$deck = new Deck();
-$player = new Player($deck);
+$game = new Blackjack();
 
-$player->checkTotal();
-$player->printTotal();
+if (!isset($_SESSION['game'])){
+    $_SESSION['game'] = $game;
+} else {
+    $game = $_SESSION['game'];
+}
+
+if (isset($_POST['action'])){
+    if ($_POST['action'] == 'hit'){
+        $game->hit();
+        echo 'give me another card';
+    }elseif ($_POST['action'] == 'stand'){
+        echo 'i stop';
+    }elseif ($_POST['action'] == 'surrender'){
+        $game->surrender();
+        echo 'i quit';
+    }
+}
+$player = $game->getPlayer();
+if ($player->lost()){
+    unset($_SESSION['game']);
+}
 
 ?>
 
@@ -33,10 +51,11 @@ $player->printTotal();
 </head>
 <body>
 
-<a href="?action=hit">Hit!</a>
-<a href="?action=stand">Stand</a>
-<a href="?ation=surrender">Surrender</a>
-
+<form method="post">
+    <input type="submit" name="action" value="hit">
+    <input type="submit" name="action" value="stand">
+    <input type="submit" name="action" value="surrender">
+</form>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
