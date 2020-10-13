@@ -12,7 +12,11 @@ require 'classes/Player.php';
 require 'classes/Blackjack.php';
 session_start();
 
+$deck = new Deck();
+$player = new Player($deck);
 
+$player->checkTotal();
+$player->printTotal();
 
 ?>
 
