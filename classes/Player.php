@@ -21,20 +21,33 @@ class Player
         }
     }
 
-    public function total(){
-        for ($i = 0; $i < count($this->cards); $i++){
-            echo $this->cards[$i]['card']['value'];
-        }
+    public function total(Card $card){
+        return $card->getValue();
     }
 
-    public function printTotal(){
-        var_dump($this->cards);
+    public function hit($deck)
+    {
+        $this->addCard($deck->drawCard());
+        $this->calcTotal();
+        if ($this->total > 21){
+            $this->lost = true;
+        }
+        echo $this->getTotal() . ' hello <br>';
+    }
+
+    public function calcTotal(){
+        $cards = $this->cards;
+        for ($i = 0; $i < count($cards); $i++) {
+            $this->total += $this->total($cards[$i]);
+        }
+        //echo $this->total . ' ';
+        return $this->total . 'calc';
     }
 
     public function addCard($card){
         array_push($this->cards, $card);
         var_dump($this->cards);
-        echo 'gave a card';
+        echo 'gave a card<br>';
     }
 
     public function getCards(): array

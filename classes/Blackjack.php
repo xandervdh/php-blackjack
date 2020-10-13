@@ -26,13 +26,13 @@ class Blackjack
         return $this->dealer;
     }
 
+    public function getDeck()
+    {
+        return $this->deck;
+    }
+
     public function surrender() :void
     {
         $this->player->setLost(true);
-    }
-
-    public function hit(){
-        $this->player->addCard($this->deck->drawCard());
-        $this->player->total();
     }
 }

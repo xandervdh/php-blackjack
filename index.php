@@ -13,6 +13,7 @@ require 'classes/Blackjack.php';
 session_start();
 
 $game = new Blackjack();
+$deck = $game->getDeck();
 
 if (!isset($_SESSION['game'])){
     $_SESSION['game'] = $game;
@@ -22,15 +23,18 @@ if (!isset($_SESSION['game'])){
 
 if (isset($_POST['action'])){
     if ($_POST['action'] == 'hit'){
-        $game->hit();
-        echo 'give me another card';
+        $game->getPlayer()->hit($deck);
     }elseif ($_POST['action'] == 'stand'){
         echo 'i stop';
     }elseif ($_POST['action'] == 'surrender'){
         $game->surrender();
         echo 'i quit';
     }
+    if ($game->getPlayer()->isLost()){
+        echo '<br>lost<br>';
+    }
 }
+
 $player = $game->getPlayer();
 if ($player->lost()){
     unset($_SESSION['game']);
