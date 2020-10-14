@@ -33,7 +33,7 @@ class Blackjack
 
     public function stand()
     {
-
+        $this->dealer->dealerHit($this->deck);
     }
 
 }

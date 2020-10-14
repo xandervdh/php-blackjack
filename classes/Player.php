@@ -28,7 +28,6 @@ class Player
         if ($this->calcTotal() > 21) {
             $this->lost = true;
         }
-        echo $this->calcTotal();
     }
 
     public function calcTotal()

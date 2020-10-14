@@ -27,7 +27,7 @@ if (isset($_POST['action'])) {
     if ($_POST['action'] == 'hit') {
         $player->hit($deck);
     } elseif ($_POST['action'] == 'stand') {
-        echo 'i stop';
+        $game->stand();
     } elseif ($_POST['action'] == 'surrender') {
         $player->surrender();
     }
@@ -62,6 +62,8 @@ if ($player->lost()) {
 </form>
 <div style="font-size: 50px">
 <?php
+echo 'Dealer: ' . $dealer->calcTotal() . '<br>';
+echo 'Player:' . $player->calcTotal() . '<br>';
 foreach ($dealer->getCards() as $card) {
     echo $card->getUnicodeCharacter(true);
 }
