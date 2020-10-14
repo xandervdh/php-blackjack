@@ -4,7 +4,6 @@ declare(strict_types=1);
 class Player
 {
     private array $cards;
-    private int $total = 0;
     private bool $lost = false;
 
     public function __construct(Deck $deck)
@@ -13,41 +12,45 @@ class Player
         array_push($this->cards, $deck->drawCard(), $deck->drawCard());
     }
 
-    public function lost(){
-        if ($this->lost){
+    public function lost()
+    {
+        if ($this->lost) {
             return true;
-        }else {
+        } else {
             return false;
         }
-    }
-
-    public function total(Card $card){
-        return $card->getValue();
     }
 
     public function hit($deck)
     {
         $this->addCard($deck->drawCard());
         $this->calcTotal();
-        if ($this->total > 21){
+        if ($this->calcTotal() > 21) {
             $this->lost = true;
         }
-        echo $this->getTotal() . ' hello <br>';
+        echo $this->calcTotal();
     }
 
-    public function calcTotal(){
-        $this->total = 0;
+    public function calcTotal()
+    {
+        $total = 0;
         $cards = $this->cards;
         for ($i = 0; $i < count($cards); $i++) {
-            $this->total += $this->total($cards[$i]);
+            $total += $this->cards[$i]->getValue();
         }
 
-        return $this->total . 'calc';
+        return $total;
     }
 
-    public function addCard($card){
+    public function addCard($card)
+    {
         array_push($this->cards, $card);
         echo 'gave a card<br>';
+    }
+
+    public function surrender(): void
+    {
+        $this->lost = true;
     }
 
     public function getCards(): array
@@ -58,16 +61,6 @@ class Player
     public function setCards(array $cards): void
     {
         $this->cards = $cards;
-    }
-
-    public function getTotal(): int
-    {
-        return $this->total;
-    }
-
-    public function setTotal(int $total): void
-    {
-        $this->total = $total;
     }
 
     public function isLost(): bool
@@ -81,4 +74,12 @@ class Player
     }
 
 
+}
+
+class Dealer extends Player{
+    public function dealerHit(Deck $deck){
+        while ($this->calcTotal() < 15){
+            parent::hit($deck);
+        }
+    }
 }

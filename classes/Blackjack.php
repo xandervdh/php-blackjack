@@ -13,7 +13,7 @@ class Blackjack
         $deck->shuffle();
         $this->deck = $deck;
         $this->player = new Player($deck);
-        $this->dealer = new Player($deck);
+        $this->dealer = new Dealer($deck);
     }
 
     public function getPlayer()
@@ -31,8 +31,9 @@ class Blackjack
         return $this->deck;
     }
 
-    public function surrender() :void
+    public function stand()
     {
-        $this->player->setLost(true);
+
     }
+
 }

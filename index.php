@@ -14,6 +14,8 @@ session_start();
 
 $game = new Blackjack();
 $deck = $game->getDeck();
+$player = $game->getPlayer();
+$dealer = $game->getDealer();
 
 if (!isset($_SESSION['game'])) {
     $_SESSION['game'] = $game;
@@ -23,20 +25,17 @@ if (!isset($_SESSION['game'])) {
 
 if (isset($_POST['action'])) {
     if ($_POST['action'] == 'hit') {
-        $game->getPlayer()->hit($deck);
+        $player->hit($deck);
     } elseif ($_POST['action'] == 'stand') {
         echo 'i stop';
     } elseif ($_POST['action'] == 'surrender') {
-        $game->surrender();
-        echo 'i quit';
+        $player->surrender();
     }
     if ($game->getPlayer()->isLost()) {
         echo '<br>lost<br>';
     }
 }
 
-$player = $game->getPlayer();
-$dealer = $game->getDealer();
 if ($player->lost()) {
     unset($_SESSION['game']);
 }
@@ -61,7 +60,7 @@ if ($player->lost()) {
     <input type="submit" name="action" value="stand">
     <input type="submit" name="action" value="surrender">
 </form>
-
+<div style="font-size: 50px">
 <?php
 foreach ($dealer->getCards() as $card) {
     echo $card->getUnicodeCharacter(true);
@@ -71,6 +70,7 @@ foreach ($player->getCards() as $card) {
     echo $card->getUnicodeCharacter(true);
 }
 ?>
+</div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
