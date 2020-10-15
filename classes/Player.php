@@ -21,10 +21,9 @@ class Player
         }
     }
 
-    public function hit($deck)
+    public function hit(Deck $deck)
     {
         $this->addCard($deck->drawCard());
-        $this->calcTotal();
         if ($this->calcTotal() > 21) {
             $this->lost = true;
         }
@@ -41,7 +40,7 @@ class Player
         return $total;
     }
 
-    public function addCard($card)
+    public function addCard(Card $card)
     {
         array_push($this->cards, $card);
         echo 'gave a card<br>';
